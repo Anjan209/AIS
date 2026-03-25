@@ -1,32 +1,8 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { 
-  Shield, 
-  ShieldAlert, 
-  ShieldCheck, 
-  Mic, 
-  MicOff, 
-  Upload, 
-  Activity, 
-  AlertTriangle,
-  Volume2,
-  Check,
-  X,
-  HelpCircle,
-  Cpu,
-  Database,
-  Globe,
-  Smartphone,
-  Download,
-  Settings,
-  Sliders,
-  ChevronDown,
-  History,
-  Moon,
-  Sun
-} from 'lucide-react';
+import { Shield, ShieldAlert, ShieldCheck, Mic, MicOff, Upload, Activity, TriangleAlert as AlertTriangle, Volume2, Check, X, Circle as HelpCircle, Cpu, Database, Globe, Smartphone, Download, Settings, FileSliders as Sliders, ChevronDown, History, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { geminiService } from './services/geminiService';
-import { cn } from './lib/utils';
+import { geminiService } from './geminiService';
+import { cn } from './utils';
 import type { DetectionResult, AnalysisSettings } from './types';
 
 // HUD Overlay Component
