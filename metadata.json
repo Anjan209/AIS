@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: Remix: Remix: Vacha Shield",
+  "description": "AI-powered voice deepfake detector for live calls and audio analysis. Detects AI-generated speech in real-time.",
+  "requestFramePermissions": [
+    "microphone",
+    "screen-wake-lock"
+  ]
+}
