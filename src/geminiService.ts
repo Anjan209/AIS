@@ -28,7 +28,11 @@ const updateConfidenceDeclaration: FunctionDeclaration = {
 
 export class GeminiService {
   private getAI(): GoogleGenAI {
-    return new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GEMINI_API_KEY is not configured. Please add it to your .env file.');
+    }
+    return new GoogleGenAI({ apiKey });
   }
 
   private handleError(error: any): Error {
