@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Shield, ShieldAlert, ShieldCheck, Mic, MicOff, Upload, Activity, TriangleAlert as AlertTriangle, Volume2, Check, X, Circle as HelpCircle, Cpu, Database, Globe, Smartphone, Download, Settings, FileSliders as Sliders, ChevronDown, History, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { geminiService } from './geminiService';
+import { backendService } from './backendService';
 import { cn } from './utils';
 import type { DetectionResult, AnalysisSettings } from './types';
 
@@ -256,7 +256,7 @@ export default function App() {
       }
 
       try {
-        const session = await geminiService.connectLive({
+        const session = backendService.connectLive({
           onResult: (res) => {
             if (res.confidence !== undefined) {
               setLiveConfidence(res.confidence);
@@ -270,7 +270,7 @@ export default function App() {
           onOpen: () => {
             console.log("Live API connected.");
           }
-        }, settings);
+        });
         liveSessionRef.current = session;
 
         const processor = audioContext.createScriptProcessor(4096, 1, 1);
@@ -370,7 +370,7 @@ export default function App() {
           reader.onload = async () => {
             try {
               const base64Data = (reader.result as string).split(',')[1];
-              const analysis = await geminiService.analyzeAudioFile(base64Data, mimeType, settings);
+              const analysis = await backendService.analyzeAudioFile(base64Data, mimeType);
               const newResult: DetectionResult = {
                 isDeepfake: analysis.isDeepfake,
                 confidence: analysis.confidence,
@@ -450,7 +450,7 @@ export default function App() {
       reader.onload = async () => {
         try {
           const base64Data = (reader.result as string).split(',')[1];
-          const analysis = await geminiService.analyzeAudioFile(base64Data, file.type, settings);
+          const analysis = await backendService.analyzeAudioFile(base64Data, file.type);
           const newResult: DetectionResult = {
             isDeepfake: analysis.isDeepfake,
             confidence: analysis.confidence,
